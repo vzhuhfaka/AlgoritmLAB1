@@ -1,4 +1,4 @@
-from lab2.utils import write_in_file, write_info, start_collect
+from lab2.utils import read_lines, write_in_file
 
 
 def majority_number(A):
@@ -11,6 +11,7 @@ def majority_number(A):
 
     if left == right:
         return left
+
     left_count = A.count(left)
     right_count = A.count(right)
 
@@ -20,17 +21,25 @@ def majority_number(A):
         return right
 
 
-def majority(input_file, output_file, info_file):
-    t_start, tracemalloc, in_f = start_collect(input_file)
-
-    ar = in_f[1].split()
-    if ar.count(majority_number(ar)) > len(ar) / 2:
-        write_in_file(output_file, '1')
+def majority(array):
+    if array.count(majority_number(array)) > len(array) / 2:
+        return 1
     else:
-        write_in_file(output_file, '0')
+        return 0
 
-    write_info(info_file, t_start, tracemalloc)
+
+def task5():
+    path_input = '../txtf/input.txt'
+    path_output = '../txtf/output.txt'
+
+    # Берём вторую строчку, так как в первой число элементов к списку чисел
+    array = read_lines(path_input)[1]
+
+    result = majority(array)
+
+    write_in_file(path_output, result)
+    print(result)
 
 
 if __name__ == '__main__':
-    majority('../txtf/input.txt', '../txtf/output.txt', '../txtf/info.txt')
+    task5()

@@ -1,4 +1,4 @@
-from lab2.utils import write_in_file, write_info, start_collect
+from lab2.utils import read_lines, write_in_file
 
 
 def BinSearch(A, n):
@@ -24,18 +24,23 @@ def BinSearch(A, n):
     return -1
 
 
-def search(input_file, output_file, info_file):
-    t_start, tracemalloc, in_f = start_collect(input_file)
+def task4():
+    path_input = '../txtf/input.txt'
+    path_output = '../txtf/output.txt'
 
-    a = in_f[1].strip()
-    b = in_f[3].strip()
-    result_s = ''
-    for i in b.split():
-        result_s += str(BinSearch(a.split(), i)) + ' '
+    # Берём вторую строчку, так как в первой число элементов к списку чисел
+    array = read_lines(path_input)[1]
 
-    write_info(info_file, t_start, tracemalloc)
-    write_in_file(output_file, result_s)
+    # берём четвертую строчку, так как в третьей число элементов к списку чисел, которые нужно найти
+    to_search_n = read_lines(path_input)[3]
+    result = ''
+
+    for i in to_search_n:
+        result += str(BinSearch(array, i)) + ' '
+
+    write_in_file(path_output, result)
+    print(result)
 
 
 if __name__ == '__main__':
-    search('../txtf/input.txt', '../txtf/output.txt', '../txtf/info.txt')
+    task4()

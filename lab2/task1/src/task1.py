@@ -27,7 +27,7 @@ def merge_sort(A):
     return merge(left, right)
 
 
-if __name__ == '__main__':
+def task1():
     path_input = '../txtf/input.txt'
     path_output = '../txtf/output.txt'
 
@@ -36,3 +36,7 @@ if __name__ == '__main__':
 
     write_in_file(path_output, array)
     print(sorted_array)
+
+
+if __name__ == '__main__':
+    task1()
