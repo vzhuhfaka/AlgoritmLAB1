@@ -3,7 +3,7 @@ import unittest
 from lab2.task1.src.task1 import merge_sort
 
 
-class TestMegreSearch(unittest.TestCase):
+class TestMegreSort(unittest.TestCase):
 
     def test_should_merge_sort(self):
         # given
