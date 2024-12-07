@@ -4,7 +4,7 @@ def read_lines(file):
         for i in f.readlines():
             el = []
             for j in i.strip().split():
-                el.append(j)
+                el.append(int(j))
             lines.append(el)
     return lines
 

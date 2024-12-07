@@ -1,10 +1,30 @@
+import time, tracemalloc
 import unittest
 from lab1.task1.src.task1 import insertionsort
-from lab1.utils import txt_to_list
 
 
 class TestInsertionSort(unittest.TestCase):
 
-    def test_insertionsort(self):
-        insertionsort('lab1/task1/txtf/test_input.txt', 'lab1/task1/txtf/test_output.txt', 'lab1/task1/txtf/test_info.txt')
-        self.assertEqual(txt_to_list('lab1/task1/txtf/test_output.txt'), [26, 31, 41, 41, 58, 59])
+    def test_should_insertion_sort(self):
+        # given
+        array = [2, 1, 4, 6, 0]
+        must_be_array = [0, 1, 2, 4, 6]
+        time_limit = 2
+        memory_limit = 256
+
+        # when
+        time_start = time.perf_counter()
+        tracemalloc.start()
+
+        sorted_array = insertionsort(array)
+
+        memory_used = tracemalloc.get_traced_memory()
+        memory_used_in_mb = memory_used[1] / 2 ** 20
+
+        tracemalloc.stop()
+        time_spent = time.perf_counter() - time_start
+
+        # then
+        self.assertEqual(sorted_array, must_be_array)
+        self.assertLessEqual(time_spent, time_limit)
+        self.assertLessEqual(memory_used_in_mb, memory_limit)

@@ -4,9 +4,10 @@ def read_lines(file):
         for i in f.readlines():
             el = []
             for j in i.strip().split():
-                el.append(j)
+                el.append(int(j))
             lines.append(el)
     return lines
+
 
 def write_in_file(file, text):
     with open(file, 'w+') as f:
@@ -14,3 +15,5 @@ def write_in_file(file, text):
             f.write(str(text)[1:-1])
         elif isinstance(text, str):
             f.write(text)
+        elif isinstance(text, int):
+            f.write(str(text))

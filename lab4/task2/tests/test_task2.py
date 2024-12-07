@@ -1,15 +1,14 @@
 import time, tracemalloc
 import unittest
-from lab1.task3.src.task3 import bin_sum
+from lab3.task2.src.task2 import task2
 
 
-class TestBinSum(unittest.TestCase):
+class TestTask2(unittest.TestCase):
 
-    def test_should_bin_sum(self):
+    def test_should_task2(self):
         # given
-        A = '10001010'
-        B = '01101001'
-        must_C = '11110011'
+        n = 10
+        must_be_array = [1, 4, 6, 8, 10, 5, 3, 7, 2, 9]
         time_limit = 2
         memory_limit = 256
 
@@ -17,7 +16,7 @@ class TestBinSum(unittest.TestCase):
         time_start = time.perf_counter()
         tracemalloc.start()
 
-        C = bin_sum(A, B)
+        worst_array = task2(n)
 
         memory_used = tracemalloc.get_traced_memory()
         memory_used_in_mb = memory_used[1] / 2 ** 20
@@ -26,6 +25,6 @@ class TestBinSum(unittest.TestCase):
         time_spent = time.perf_counter() - time_start
 
         # then
-        self.assertEqual(C, must_C)
+        self.assertEqual(worst_array, must_be_array)
         self.assertLessEqual(time_spent, time_limit)
         self.assertLessEqual(memory_used_in_mb, memory_limit)

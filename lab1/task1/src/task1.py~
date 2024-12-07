@@ -1,4 +1,4 @@
-from lab1.utils import read_lines, write_in_file
+from lab2.utils import read_lines, write_in_file
 
 
 def insertionsort(ar):

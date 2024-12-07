@@ -1,0 +1,15 @@
+def read_lines(file):
+    lines = []
+    with open(file, 'r') as f:
+        for i in f.readlines():
+            el = []
+            for j in i.strip().split():
+                el.append(int(j))
+            lines.append(el)
+    return lines
+
+
+
+def read_line(file_txt):
+    with open(file_txt, 'r') as f:
+        return f.readline()
