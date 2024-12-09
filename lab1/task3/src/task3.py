@@ -1,33 +1,37 @@
-from lab1.utils import write_in_file, str_to_list, write_info, start_collect, list_to_str
+from lab1.utils import read_lines, write_in_file
 
 
 def bin_sum(A, B):
-    C = []
+    C = ""
     t = 0
-    A.reverse()
-    B.reverse()
+    A = A[::-1]
+    B = B[::-1]
+
     for i in range(len(A)):
         a = int(A[i])
         b = int(B[i])
         c = a + b + t
-        C.append(c % 2)
+        C = str(c % 2) + C
         t = c // 2
-    C.append(t)
-    return C[::-1]
+
+    if t > 0:
+        C = str(t) + C
+
+    return C
 
 
-def main_binsum(file_in, file_output, info_file):
-    t_start, tracemalloc_s, file_input = start_collect(file_in)
+def task3():
+    path_input = '../txtf/input.txt'
+    path_output = '../txtf/output.txt'
 
-    n1, n2 = map(str, file_input[0].split())
-
-    A, B = str_to_list(n1), str_to_list(n2)
-
+    input_str = read_lines(path_input)[0]
+    A = input_str[0]
+    B = input_str[1]
     C = bin_sum(A, B)
 
-    write_info(info_file, t_start, tracemalloc_s)
-    write_in_file(file_output, list_to_str(C))
+    write_in_file(path_output, C)
+    print(C)
 
 
 if __name__ == '__main__':
-    main_binsum('../txtf/test_input.txt', '../txtf/test_output.txt', '../txtf/test_time.txt')
+    task3()

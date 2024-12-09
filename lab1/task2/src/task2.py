@@ -1,27 +1,25 @@
-from lab1.utils import start_collect, write_info, write_in_file
+from lab1.utils import read_lines, write_in_file
 
 
-def linearfinder(file_in, file_output, info_file):
-    t_start, tracemalloc, file_input = start_collect(file_in)
+def linearfinder(ar, n):
+    res_n = []
+    for i in range(len(ar)):
+        if ar[i] == n:
+            res_n.append(i)
+    return res_n
 
-    s = [int(i) for i in file_input[0].strip().split()]
-    v = int(file_input[1])
 
-    res_i = []
-    for i in range(len(s)):
-        if s[i] == v:
-            res_i.append(i)
+def task2():
+    path_input = '../txtf/input.txt'
+    path_output = '../txtf/output.txt'
 
-    res_s = ''
-    for i in range(len(res_i)):
-        if i == len(res_i) - 1:
-            res_s += str(res_i[i])
-        else:
-            res_s += str(res_i[i]) + ', '
+    array = read_lines(path_input)[0]
+    need_to_find = read_lines(path_input)[1][0]
+    found_n = linearfinder(array, need_to_find)
 
-    write_info(info_file, t_start, tracemalloc)
-    write_in_file(file_output, res_s)
+    write_in_file(path_output, found_n)
+    print(found_n)
 
 
 if __name__ == '__main__':
-    linearfinder('../txtf/test_input.txt', '../txtf/test_output.txt', '../txtf/info.txt')
+    task2()

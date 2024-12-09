@@ -1,27 +1,27 @@
-from lab1.utils import write_info, start_collect, write_in_file
+from lab1.utils import read_lines, write_in_file
 
 
-def insertionsort(file_in, file_out, file_t):
-    t_start, tracemalloc, file_input = start_collect(file_in)
-
-    n = int(file_input[0])
-    s = [int(el) for el in file_input[1].split()]
-
-    for i in range(1, len(s)):
-        value = s[i]
+def insertionsort(ar):
+    for i in range(1, len(ar)):
+        value = ar[i]
         j = i - 1
-        while value < s[j] and j >= 0:
-            s[j+1] = s[j]
+        while value < ar[j] and j >= 0:
+            ar[j+1] = ar[j]
             j -= 1
-        s[j+1] = value
+        ar[j+1] = value
+    return ar
 
-    res_s = ''
-    for elem in s:
-        res_s += f'{elem} '
 
-    write_info(file_t, t_start, tracemalloc)
-    write_in_file(file_out, res_s)
+def task1():
+    path_input = '../txtf/input.txt'
+    path_output = '../txtf/output.txt'
+
+    array = read_lines(path_input)[1]  # берём вторую строчку, так как в первой число элементов
+    sorted_array = insertionsort(array)
+
+    write_in_file(path_output, sorted_array)
+    print(sorted_array)
 
 
 if __name__ == '__main__':
-    insertionsort('../txtf/test_input.txt', '../txtf/test_output.txt', '../txtf/test_info.txt')
+    task1()
